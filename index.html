@@ -1081,6 +1081,10 @@
         <div class="palette-label">Monochrome</div>
       </div>
     </div>
+    <div class="field full" style="margin-top: 1.5rem;">
+      <label>Colour Remarks — Any specific notes? (e.g. warm tones for bedroom, white for kitchen)</label>
+      <textarea id="colour-remarks" placeholder="e.g. I want earthy tones only in the living room, keep the kitchen light and bright…"></textarea>
+    </div>
   </div>
 
   <div class="ornament">· · ·</div>
@@ -1116,6 +1120,10 @@
           <option>Somewhat flexible (±2 months)</option>
           <option>Open / No rush</option>
         </select>
+      </div>
+      <div class="field full">
+        <label>Budget & Timeline Remarks — Any specific notes? (e.g. kitchen has higher budget, bedroom can wait)</label>
+        <textarea id="budget-remarks" placeholder="e.g. We can stretch the budget for the living room, but want to keep bedroom minimal and affordable…"></textarea>
       </div>
     </div>
   </div>
@@ -1166,6 +1174,10 @@
           <option>Both / Multiple</option>
           <option>Other</option>
         </select>
+      </div>
+      <div class="field full">
+        <label>Lifestyle Remarks — Any specific notes? (e.g. need extra storage in master bedroom, home office must have blackout)</label>
+        <textarea id="lifestyle-remarks" placeholder="e.g. My mother-in-law stays with us so the guest room needs to feel permanent, not temporary…"></textarea>
       </div>
     </div>
   </div>
@@ -1304,6 +1316,9 @@
       mustHaves:    document.getElementById('must-haves').value,
       dealBreakers: document.getElementById('deal-breakers').value,
       otherNotes:   document.getElementById('other-notes').value,
+      colourRemarks:   (document.getElementById('colour-remarks')?.value   || ''),
+      budgetRemarks:   (document.getElementById('budget-remarks')?.value   || ''),
+      lifestyleRemarks:(document.getElementById('lifestyle-remarks')?.value || ''),
       rooms:        [...document.querySelectorAll('#room-chips .chip.active')].map(c => c.dataset.room),
       styles:       [...document.querySelectorAll('.style-card.selected')].map(c => c.dataset.style),
       palettes:     [...document.querySelectorAll('.palette-card.selected')].map(c => c.dataset.palette),
@@ -1329,10 +1344,13 @@
     html += chips('Design Styles', d.styles);
     if (d.styleNotes) html += row('Style Notes', d.styleNotes);
     html += chips('Colour Direction', d.palettes);
+    if (d.colourRemarks)    html += row('Colour Remarks', d.colourRemarks);
     html += row('Budget', `₹${d.budget} Lakhs`);
     html += row('Timeline', [d.timeline, d.flex].filter(Boolean).join(' — '));
+    if (d.budgetRemarks)    html += row('Budget Remarks', d.budgetRemarks);
     html += row('Household', [`${d.adults||'—'} adults`, `${d.children||'0'} children`, d.pets].filter(Boolean).join(', '));
     html += chips('Priorities', d.priorities);
+    if (d.lifestyleRemarks) html += row('Lifestyle Remarks', d.lifestyleRemarks);
     if (d.keepItems)    html += row('Items to Keep', d.keepItems);
     if (d.mustHaves)    html += row('Must-Haves', d.mustHaves);
     if (d.dealBreakers) html += row('Deal-Breakers', d.dealBreakers);
@@ -1399,6 +1417,9 @@
       'Must-Haves':           d.mustHaves   || '—',
       'Deal-Breakers':        d.dealBreakers|| '—',
       'Additional Notes':     d.otherNotes  || '—',
+      'Colour Remarks':       d.colourRemarks    || '—',
+      'Budget Remarks':       d.budgetRemarks    || '—',
+      'Lifestyle Remarks':    d.lifestyleRemarks || '—',
     };
 
     try {
