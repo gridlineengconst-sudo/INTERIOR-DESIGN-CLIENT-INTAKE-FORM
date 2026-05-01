@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Intake — Client Brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F7F4EF;
+    --warm-white: #FDFCFA;
+    --charcoal: #1C1C1A;
+    --mid: #5A5854;
+    --muted: #9A9690;
+    --gold: #B8956A;
+    --gold-light: #E8D9C5;
+    --border: #E2DDD5;
+    --border-dark: #C8C0B4;
+    --selected-bg: #F0E8DC;
+    --serif: 'Cormorant Garamond', serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  body {
+    background: var(--cream);
+    color: var(--charcoal);
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ── Header ─────────────────────────────── */
+  header {
+    background: var(--charcoal);
+    color: #fff;
+    padding: 3.5rem 4rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    border: 1px solid rgba(184,149,106,0.25);
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; right: 80px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    border: 1px solid rgba(184,149,106,0.15);
+  }
+  .header-eyebrow {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  header h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: 300;
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    color: #fff;
+  }
+  header h1 em { font-style: italic; color: var(--gold); }
+  .header-sub {
+    margin-top: 1.2rem;
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+    max-width: 480px;
+    line-height: 1.6;
+  }
+  .header-steps {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+  }
+  .step-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.05em;
+  }
+  .step-pill .num {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    border: 1px solid rgba(184,149,106,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    color: var(--gold);
+  }
+
+  /* ── Form body ───────────────────────────── */
+  .form-body {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
+  }
+
+  /* ── Section ─────────────────────────────── */
+  .section {
+    margin-bottom: 4rem;
+  }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-num {
+    font-family: var(--serif);
+    font-size: 2.4rem;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: 1.7rem;
+    font-weight: 400;
+    color: var(--charcoal);
+    letter-spacing: -0.01em;
+  }
+  .section-desc {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 0.2rem;
+    margin-bottom: 2rem;
+  }
+
+  /* ── Fields ──────────────────────────────── */
+  .field-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.2rem;
+  }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field.full { grid-column: 1 / -1; }
+  label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid);
+    font-weight: 400;
+  }
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  select,
+  textarea {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 12px 14px;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--charcoal);
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--gold);
+  }
+  textarea { resize: vertical; min-height: 100px; }
+  select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239A9690' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+
+  /* ── Room chips ───────────────────────────── */
+  .chip-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 16px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--mid);
+    background: var(--warm-white);
+    transition: all 0.18s;
+    user-select: none;
+  }
+  .chip:hover { border-color: var(--gold); color: var(--charcoal); }
+  .chip.active {
+    background: var(--charcoal);
+    border-color: var(--charcoal);
+    color: #fff;
+  }
+  .chip svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+  /* ── Style cards ──────────────────────────── */
+  .style-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+  }
+  .style-card {
+    border: 2px solid transparent;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--warm-white);
+    position: relative;
+  }
+  .style-card:hover { border-color: var(--gold-light); transform: translateY(-2px); }
+  .style-card.selected { border-color: var(--gold); }
+  .style-card .img-wrap {
+    width: 100%;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    background: var(--border);
+  }
+  .style-card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s;
+  }
+  .style-card:hover img { transform: scale(1.04); }
+  .style-card .card-info {
+    padding: 12px 14px;
+    border-top: 1px solid var(--border);
+  }
+  .card-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--charcoal);
+  }
+  .card-desc {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+    line-height: 1.5;
+  }
+  .check-badge {
+    position: absolute;
+    top: 10px; right: 10px;
+    width: 26px; height: 26px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+  .style-card.selected .check-badge { display: flex; }
+  .check-badge svg { width: 13px; height: 13px; stroke: #fff; }
+
+  /* ── Palette ──────────────────────────────── */
+  .palette-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+  }
+  .palette-card {
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--warm-white);
+  }
+  .palette-card:hover { border-color: var(--gold-light); transform: translateY(-2px); }
+  .palette-card.selected { border-color: var(--gold); }
+  .palette-swatches {
+    display: flex;
+    height: 64px;
+  }
+  .swatch { flex: 1; }
+  .palette-label {
+    padding: 8px 10px;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--mid);
+    text-align: center;
+  }
+
+  /* ── Budget slider ────────────────────────── */
+  .budget-display {
+    font-family: var(--serif);
+    font-size: 2.6rem;
+    font-weight: 300;
+    color: var(--charcoal);
+    margin-bottom: 0.5rem;
+  }
+  .budget-display span { color: var(--gold); }
+  input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 2px;
+    background: var(--border);
+    outline: none;
+    border-radius: 2px;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--charcoal);
+    border: 2px solid var(--gold);
+    cursor: pointer;
+  }
+  .budget-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 8px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── Priority tags ────────────────────────── */
+  .priority-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .priority-tag {
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 13px;
+    color: var(--mid);
+    cursor: pointer;
+    background: var(--warm-white);
+    transition: all 0.18s;
+    user-select: none;
+  }
+  .priority-tag:hover { border-color: var(--gold); color: var(--charcoal); }
+  .priority-tag.active {
+    background: var(--selected-bg);
+    border-color: var(--gold);
+    color: var(--charcoal);
+  }
+
+  /* ── Divider ──────────────────────────────── */
+  .ornament {
+    text-align: center;
+    color: var(--gold);
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    letter-spacing: 0.5em;
+    margin: 1rem 0 3rem;
+    opacity: 0.5;
+  }
+
+  /* ── Room dimensions ──────────────────────── */
+  #room-dims { display: none; }
+  .room-dim-row {
+    display: grid;
+    grid-template-columns: 180px 1fr 1fr 1fr;
+    gap: 12px;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+  .room-dim-row:last-child { border-bottom: none; }
+  .room-dim-label { color: var(--charcoal); font-weight: 400; }
+  .room-dim-row input { text-align: center; }
+
+  /* ── Submit ───────────────────────────────── */
+  .submit-area {
+    background: var(--charcoal);
+    border-radius: 8px;
+    padding: 3rem;
+    text-align: center;
+    margin-top: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .submit-area::before {
+    content: '';
+    position: absolute;
+    top: -40px; left: -40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    border: 1px solid rgba(184,149,106,0.2);
+  }
+  .submit-title {
+    font-family: var(--serif);
+    font-size: 2rem;
+    font-weight: 300;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+  .submit-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 2rem;
+  }
+  .btn-primary {
+    display: inline-block;
+    padding: 14px 48px;
+    background: var(--gold);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    font-weight: 400;
+  }
+  .btn-primary:hover { opacity: 0.88; }
+  .btn-secondary {
+    display: inline-block;
+    padding: 14px 36px;
+    background: transparent;
+    color: rgba(255,255,255,0.5);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 4px;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 300;
+    margin-left: 12px;
+  }
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+
+  /* ── Summary modal ────────────────────────── */
+  .overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(28,28,26,0.85);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  .overlay.show { display: flex; }
+  .modal {
+    background: var(--warm-white);
+    border-radius: 8px;
+    max-width: 680px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 3rem;
+  }
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .modal-title {
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: var(--charcoal);
+  }
+  .modal-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+  .close-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--muted);
+    font-size: 22px;
+    line-height: 1;
+    padding: 4px;
+  }
+  .summary-section { margin-bottom: 1.8rem; }
+  .summary-label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .summary-value {
+    font-size: 14px;
+    color: var(--charcoal);
+    line-height: 1.6;
+  }
+  .summary-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .summary-chip {
+    padding: 4px 12px;
+    background: var(--selected-bg);
+    border: 1px solid var(--gold-light);
+    border-radius: 100px;
+    font-size: 12px;
+    color: var(--charcoal);
+  }
+  .modal-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .modal-btn {
+    padding: 12px 28px;
+    border-radius: 4px;
+    font-family: var(--sans);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.06em;
+  }
+  .modal-btn.primary {
+    background: var(--charcoal);
+    color: #fff;
+    border: none;
+  }
+  .modal-btn.primary:hover { background: #333; }
+  .modal-btn.secondary {
+    background: transparent;
+    color: var(--mid);
+    border: 1px solid var(--border);
+  }
+  .modal-btn.secondary:hover { border-color: var(--border-dark); color: var(--charcoal); }
+
+  .btn-submit {
+    display: inline-block;
+    padding: 14px 48px;
+    background: #9BD115;
+    color: #0b0d0f;
+    border: none;
+    border-radius: 4px;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    font-weight: 500;
+    margin-left: 12px;
+  }
+  .btn-submit:hover { opacity: 0.88; }
+  .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* ── Mobile ───────────────────────────────── */
+  @media (max-width: 640px) {
+
+    /* Header */
+    header { padding: 1.75rem 1.25rem 1.5rem; }
+    header::before, header::after { display: none; }
+    header h1 { font-size: 2rem; line-height: 1.1; }
+    .header-sub { font-size: 13px; margin-top: 0.8rem; }
+    .header-steps { gap: 0.75rem; margin-top: 1.25rem; flex-wrap: wrap; }
+    .step-pill { font-size: 11px; gap: 6px; }
+    .step-pill .num { width: 18px; height: 18px; font-size: 10px; }
+
+    /* Form body */
+    .form-body { padding: 1.5rem 1rem 3rem; }
+
+    /* Sections */
+    .section { margin-bottom: 2.5rem; }
+    .section-header { gap: 0.75rem; margin-bottom: 1.25rem; padding-bottom: 0.75rem; }
+    .section-num { font-size: 1.8rem; }
+    .section-title { font-size: 1.25rem; }
+    .section-desc { font-size: 12px; }
+
+    /* Fields — force single column */
+    .field-grid { grid-template-columns: 1fr; gap: 1rem; }
+
+    /* Style cards — 2 per row */
+    .style-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .card-name { font-size: 11px; }
+    .card-desc { font-size: 10px; }
+    .card-info { padding: 8px 10px; }
+
+    /* Palette — 2 per row */
+    .palette-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .palette-label { font-size: 11px; padding: 6px 8px; }
+    .palette-swatches { height: 52px; }
+
+    /* Room chips */
+    .chip { font-size: 12px; padding: 7px 12px; }
+
+    /* Room dimension rows */
+    .room-dim-row { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .room-dim-label { grid-column: 1 / -1; padding-bottom: 2px; font-size: 13px; }
+
+    /* Budget */
+    .budget-display { font-size: 2rem; }
+    .budget-labels { font-size: 10px; }
+
+    /* Priority tags */
+    .priority-tag { font-size: 12px; padding: 6px 12px; }
+
+    /* Submit area */
+    .submit-area { padding: 2rem 1.25rem; border-radius: 6px; }
+    .submit-title { font-size: 1.5rem; }
+    .submit-sub { font-size: 12px; margin-bottom: 1.5rem; }
+    .btn-primary,
+    .btn-submit {
+      display: block;
+      width: 100%;
+      margin: 0 0 10px 0;
+      padding: 15px 24px;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    /* Modals — bottom sheet style */
+    .overlay { padding: 0; align-items: flex-end; }
+    .modal {
+      border-radius: 16px 16px 0 0;
+      max-height: 90vh;
+      padding: 1.5rem 1.25rem 2rem;
+    }
+    .modal-title { font-size: 1.3rem; }
+    .modal-header { margin-bottom: 1.25rem; padding-bottom: 1rem; }
+    .modal-actions { flex-direction: column; gap: 8px; }
+    .modal-btn { width: 100%; text-align: center; padding: 13px; }
+
+    /* Ornament divider */
+    .ornament { font-size: 1rem; margin: 0.5rem 0 2rem; }
+  }
+
+  /* Extra small screens — 380px and below */
+  @media (max-width: 380px) {
+    header h1 { font-size: 1.7rem; }
+    .section-title { font-size: 1.1rem; }
+    .style-grid { grid-template-columns: 1fr; }
+    .palette-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-eyebrow">Client Intake Form</div>
+  <h1>Let's shape your<br><em>perfect space</em></h1>
+  <p class="header-sub">Fill in the details below so we can craft a design direction that's truly yours. Every great interior starts with a conversation.</p>
+  <div class="header-steps">
+    <div class="step-pill"><div class="num">1</div> Client Info</div>
+    <div class="step-pill"><div class="num">2</div> Project Scope</div>
+    <div class="step-pill"><div class="num">3</div> Style Vision</div>
+    <div class="step-pill"><div class="num">4</div> Preferences</div>
+    <div class="step-pill"><div class="num">5</div> Brief</div>
+  </div>
+</header>
+
+<div class="form-body">
+
+  <!-- ── 1. Client Details ──────────────────── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <div><div class="section-title">Client Details</div></div>
+    </div>
+    <div class="field-grid">
+      <div class="field">
+        <label>Full Name</label>
+        <input type="text" id="client-name" placeholder="Your full name">
+      </div>
+      <div class="field">
+        <label>Email Address</label>
+        <input type="email" id="client-email" placeholder="email@example.com">
+      </div>
+      <div class="field">
+        <label>Phone Number</label>
+        <input type="tel" id="client-phone" placeholder="+91 00000 00000">
+      </div>
+      <div class="field">
+        <label>Property Location</label>
+        <input type="text" id="client-location" placeholder="City, State">
+      </div>
+      <div class="field full">
+        <label>Project Address / Property Name</label>
+        <input type="text" id="client-address" placeholder="Full address or project name">
+      </div>
+    </div>
+  </div>
+
+  <div class="ornament">· · ·</div>
+
+  <!-- ── 2. Project Scope ───────────────────── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <div><div class="section-title">Project Scope</div></div>
+    </div>
+    <p class="section-desc">Select the rooms / spaces included in this project. We'll use this to gather dimensions.</p>
+
+    <div class="chip-grid" id="room-chips">
+      <div class="chip" data-room="Living Room" onclick="toggleChip(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 10h18M3 10V20h18V10M3 10l2-6h14l2 6"/><path d="M7 20v-4h10v4"/></svg>
+        Living Room
+      </div>
+      <div class="chip" data-room="Master Bedroom" onclick="toggleChip(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 19V9a2 2 0 012-2h14a2 2 0 012 2v10M3 14h18M7 9v5m10-5v5"/></svg>
+        Master Bedroom
+      </div>
+      <div class="chip" data-room="Guest Bedroom" onclick="toggleChip(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 19V9a2 2 0 012-2h14a2 2 0 012 2v10M3 14h18M7 9v5m10-5v5"/></svg>
+        Guest Bedroom
+      </div>
+      <div class="chip" data-room="Kitchen" onclick="toggleChip(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9v6m6-6v6m-6-3h6"/></svg>
+        Kitchen
+      </div>
+      <div class="chip" data-room="Dining Room" onclick="toggleChip(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 14h18M12 3v11m-6 7h12"/><circle cx="12" cy="3" r="1"/></svg>
+        Dining Room
+      </div>
+      <div class="chip" data-room="Bathroom" onclick="toggleChip(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 19v1a2 2 0 002 2h10a2 2 0 002-2v-1M3 10h18v9H3zM7 10V6a2 2 0 012-2h2"/></svg>
+        Bathroom
+      </div>
+      <div class="chip" data-room="Home Office" onclick="toggleChip(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2M12 12v4m-2-2h4"/></svg>
+        Home Office
+      </div>
+      <div class="chip" data-room="Kids Room" onclick="toggleChip(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 018 0v2"/></svg>
+        Kids Room
+      </div>
+      <div class="chip" data-room="Pooja Room" onclick="toggleChip(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z"/></svg>
+        Pooja Room
+      </div>
+      <div class="chip" data-room="Balcony / Terrace" onclick="toggleChip(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M5 21V10l7-7 7 7v11M9 21v-6h6v6"/></svg>
+        Balcony / Terrace
+      </div>
+      <div class="chip" data-room="Entryway / Foyer" onclick="toggleChip(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M5 21V9l7-6 7 6v12M10 21v-6h4v6"/><circle cx="12" cy="13" r="1.5"/></svg>
+        Entryway / Foyer
+      </div>
+      <div class="chip" data-room="Full Home" onclick="toggleChip(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M3 9l9-7 9 7v12M9 21v-6h6v6"/></svg>
+        Full Home
+      </div>
+    </div>
+
+    <!-- Room dimensions -->
+    <div id="room-dims" style="margin-top: 2rem;">
+      <p class="section-desc" style="margin-bottom: 1rem;">Approximate dimensions for selected rooms</p>
+      <div style="background: var(--warm-white); border: 1px solid var(--border); border-radius: 6px; padding: 0 1.5rem;">
+        <div class="room-dim-row" style="border-bottom: 1px solid var(--border); padding-top: 10px; padding-bottom: 10px;">
+          <div class="room-dim-label" style="font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em;">Room</div>
+          <div style="font-size: 11px; color: var(--muted); text-align: center; text-transform: uppercase; letter-spacing: 0.1em;">Length (ft)</div>
+          <div style="font-size: 11px; color: var(--muted); text-align: center; text-transform: uppercase; letter-spacing: 0.1em;">Width (ft)</div>
+          <div style="font-size: 11px; color: var(--muted); text-align: center; text-transform: uppercase; letter-spacing: 0.1em;">Height (ft)</div>
+        </div>
+        <div id="dim-rows"></div>
+      </div>
+    </div>
+
+    <!-- Project type -->
+    <div style="margin-top: 2rem;" class="field-grid">
+      <div class="field">
+        <label>Project Type</label>
+        <select id="project-type">
+          <option value="">Select type</option>
+          <option>New Home — Fresh Start</option>
+          <option>Renovation / Makeover</option>
+          <option>Partial Refresh</option>
+          <option>Rental / Investment Property</option>
+          <option>Commercial / Studio</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Property Type</label>
+        <select id="property-type">
+          <option value="">Select property</option>
+          <option>Apartment / Flat</option>
+          <option>Independent House / Villa</option>
+          <option>Penthouse</option>
+          <option>Studio</option>
+          <option>Row House</option>
+          <option>Farmhouse</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="ornament">· · ·</div>
+
+  <!-- ── 3. Design Style Vision ─────────────── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <div><div class="section-title">Style Vision</div></div>
+    </div>
+    <p class="section-desc">Select all the design styles that resonate with you. You can choose multiple — this helps us understand the aesthetic range and blend.</p>
+
+    <div class="style-grid">
+
+      <div class="style-card" onclick="toggleStyle(this)" data-style="Modern Minimalist">
+        <div class="img-wrap">
+          <img src="images/modern.jpg" alt="Modern Minimalist" loading="lazy">
+        </div>
+        <div class="check-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="card-info">
+          <div class="card-name">Modern Minimalist</div>
+          <div class="card-desc">Clean lines, neutral palettes, purposeful simplicity</div>
+        </div>
+      </div>
+
+      <div class="style-card" onclick="toggleStyle(this)" data-style="Scandinavian">
+        <div class="img-wrap">
+          <img src="images/scandinavian.jpg" alt="Scandinavian" loading="lazy">
+        </div>
+        <div class="check-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="card-info">
+          <div class="card-name">Scandinavian</div>
+          <div class="card-desc">Cosy warmth, light woods, functional beauty</div>
+        </div>
+      </div>
+
+      <div class="style-card" onclick="toggleStyle(this)" data-style="Japandi">
+        <div class="img-wrap">
+          <img src="images/japandi.jpg" alt="Japandi" loading="lazy">
+        </div>
+        <div class="check-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="card-info">
+          <div class="card-name">Japandi</div>
+          <div class="card-desc">Japanese calm meets Scandinavian hygge</div>
+        </div>
+      </div>
+
+      <div class="style-card" onclick="toggleStyle(this)" data-style="Bohemian / Eclectic">
+        <div class="img-wrap">
+          <img src="images/bohemian.jpg" alt="Bohemian" loading="lazy">
+        </div>
+        <div class="check-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="card-info">
+          <div class="card-name">Bohemian / Eclectic</div>
+          <div class="card-desc">Layered textures, global finds, joyful colour</div>
+        </div>
+      </div>
+
+      <div class="style-card" onclick="toggleStyle(this)" data-style="Industrial Loft">
+        <div class="img-wrap">
+          <img src="images/industrial.jpg" alt="Industrial" loading="lazy">
+        </div>
+        <div class="check-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="card-info">
+          <div class="card-name">Industrial Loft</div>
+          <div class="card-desc">Raw concrete, exposed metal, urban edge</div>
+        </div>
+      </div>
+
+      <div class="style-card" onclick="toggleStyle(this)" data-style="Mid-Century Modern">
+        <div class="img-wrap">
+          <img src="images/mid-century.jpg" alt="Mid-Century Modern" loading="lazy">
+        </div>
+        <div class="check-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="card-info">
+          <div class="card-name">Mid-Century Modern</div>
+          <div class="card-desc">Retro curves, bold accents, organic forms</div>
+        </div>
+      </div>
+
+      <div class="style-card" onclick="toggleStyle(this)" data-style="Art Deco / Glamour">
+        <div class="img-wrap">
+          <img src="images/art-deco.jpg" alt="Art Deco" loading="lazy">
+        </div>
+        <div class="check-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="card-info">
+          <div class="card-name">Art Deco / Glamour</div>
+          <div class="card-desc">Gold geometry, velvet richness, drama</div>
+        </div>
+      </div>
+
+      <div class="style-card" onclick="toggleStyle(this)" data-style="Coastal / Mediterranean">
+        <div class="img-wrap">
+          <img src="images/coastal.jpg" alt="Coastal" loading="lazy">
+        </div>
+        <div class="check-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="card-info">
+          <div class="card-name">Coastal / Mediterranean</div>
+          <div class="card-desc">Breezy blues, natural linen, easy living</div>
+        </div>
+      </div>
+
+      <div class="style-card" onclick="toggleStyle(this)" data-style="Traditional / Indian Classical">
+        <div class="img-wrap">
+          <img src="images/traditional.jpg" alt="Traditional" loading="lazy">
+        </div>
+        <div class="check-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="card-info">
+          <div class="card-name">Traditional / Indian Classical</div>
+          <div class="card-desc">Rich heritage, carved wood, vibrant textiles</div>
+        </div>
+      </div>
+
+      <div class="style-card" onclick="toggleStyle(this)" data-style="Contemporary Luxury">
+        <div class="img-wrap">
+          <img src="images/contemporary.jpg" alt="Contemporary Luxury" loading="lazy">
+        </div>
+        <div class="check-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="card-info">
+          <div class="card-name">Contemporary Luxury</div>
+          <div class="card-desc">Refined materials, statement pieces, curated calm</div>
+        </div>
+      </div>
+
+      <div class="style-card" onclick="toggleStyle(this)" data-style="Maximalist">
+        <div class="img-wrap">
+          <img src="images/maximalist.jpg" alt="Maximalist" loading="lazy">
+        </div>
+        <div class="check-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="card-info">
+          <div class="card-name">Maximalist</div>
+          <div class="card-desc">More is more — pattern, colour, personality</div>
+        </div>
+      </div>
+
+      <div class="style-card" onclick="toggleStyle(this)" data-style="Biophilic / Nature-Inspired">
+        <div class="img-wrap">
+          <img src="images/biophilic.jpg" alt="Biophilic" loading="lazy">
+        </div>
+        <div class="check-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="card-info">
+          <div class="card-name">Biophilic / Nature-Inspired</div>
+          <div class="card-desc">Plants, stone, water features, organic textures</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="field" style="margin-top: 1.5rem;">
+      <label>Other inspirations or references (optional)</label>
+      <textarea id="style-notes" placeholder="Describe any specific look, mood board, Pinterest board, or reference spaces you love…"></textarea>
+    </div>
+  </div>
+
+  <div class="ornament">· · ·</div>
+
+  <!-- ── 4. Colour Palette Preference ───────── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <div><div class="section-title">Colour Direction</div></div>
+    </div>
+    <p class="section-desc">Pick the palette families that speak to you. Multiple selections welcome.</p>
+    <div class="palette-grid" id="palette-grid">
+      <div class="palette-card" onclick="togglePalette(this)" data-palette="Warm Neutrals">
+        <div class="palette-swatches">
+          <div class="swatch" style="background:#F5ECD7"></div>
+          <div class="swatch" style="background:#D9B896"></div>
+          <div class="swatch" style="background:#B8956A"></div>
+          <div class="swatch" style="background:#8B6B4A"></div>
+          <div class="swatch" style="background:#5C3D2E"></div>
+        </div>
+        <div class="palette-label">Warm Neutrals</div>
+      </div>
+      <div class="palette-card" onclick="togglePalette(this)" data-palette="Cool Greys">
+        <div class="palette-swatches">
+          <div class="swatch" style="background:#F0F0F2"></div>
+          <div class="swatch" style="background:#C4C4CC"></div>
+          <div class="swatch" style="background:#8A8A96"></div>
+          <div class="swatch" style="background:#4A4A58"></div>
+          <div class="swatch" style="background:#1C1C2A"></div>
+        </div>
+        <div class="palette-label">Cool Greys</div>
+      </div>
+      <div class="palette-card" onclick="togglePalette(this)" data-palette="Earthy Greens">
+        <div class="palette-swatches">
+          <div class="swatch" style="background:#EDF2E8"></div>
+          <div class="swatch" style="background:#B5C9A4"></div>
+          <div class="swatch" style="background:#789B68"></div>
+          <div class="swatch" style="background:#4A6E40"></div>
+          <div class="swatch" style="background:#2A4024"></div>
+        </div>
+        <div class="palette-label">Earthy Greens</div>
+      </div>
+      <div class="palette-card" onclick="togglePalette(this)" data-palette="Ocean Blues">
+        <div class="palette-swatches">
+          <div class="swatch" style="background:#E8F4F8"></div>
+          <div class="swatch" style="background:#A8D4E6"></div>
+          <div class="swatch" style="background:#5A9EB8"></div>
+          <div class="swatch" style="background:#2A6E8C"></div>
+          <div class="swatch" style="background:#0A3C52"></div>
+        </div>
+        <div class="palette-label">Ocean Blues</div>
+      </div>
+      <div class="palette-card" onclick="togglePalette(this)" data-palette="Terracotta & Rust">
+        <div class="palette-swatches">
+          <div class="swatch" style="background:#FAE8E0"></div>
+          <div class="swatch" style="background:#E8B09A"></div>
+          <div class="swatch" style="background:#C46A48"></div>
+          <div class="swatch" style="background:#8C3A20"></div>
+          <div class="swatch" style="background:#541C0A"></div>
+        </div>
+        <div class="palette-label">Terracotta & Rust</div>
+      </div>
+      <div class="palette-card" onclick="togglePalette(this)" data-palette="Dusty Blush & Rose">
+        <div class="palette-swatches">
+          <div class="swatch" style="background:#FAF0F0"></div>
+          <div class="swatch" style="background:#EAC4C4"></div>
+          <div class="swatch" style="background:#D08888"></div>
+          <div class="swatch" style="background:#A85858"></div>
+          <div class="swatch" style="background:#6A2A2A"></div>
+        </div>
+        <div class="palette-label">Dusty Blush & Rose</div>
+      </div>
+      <div class="palette-card" onclick="togglePalette(this)" data-palette="Midnight & Gold">
+        <div class="palette-swatches">
+          <div class="swatch" style="background:#1A1A2E"></div>
+          <div class="swatch" style="background:#2D2D4E"></div>
+          <div class="swatch" style="background:#B8956A"></div>
+          <div class="swatch" style="background:#D4B896"></div>
+          <div class="swatch" style="background:#F5E8D0"></div>
+        </div>
+        <div class="palette-label">Midnight & Gold</div>
+      </div>
+      <div class="palette-card" onclick="togglePalette(this)" data-palette="Monochrome White">
+        <div class="palette-swatches">
+          <div class="swatch" style="background:#FFFFFF"></div>
+          <div class="swatch" style="background:#E8E8E8"></div>
+          <div class="swatch" style="background:#C0C0C0"></div>
+          <div class="swatch" style="background:#888888"></div>
+          <div class="swatch" style="background:#222222"></div>
+        </div>
+        <div class="palette-label">Monochrome</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ornament">· · ·</div>
+
+  <!-- ── 5. Budget & Timeline ───────────────── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">05</div>
+      <div><div class="section-title">Budget & Timeline</div></div>
+    </div>
+    <div class="field-grid">
+      <div class="field full">
+        <label>Approximate Budget</label>
+        <div class="budget-display">₹<span id="budget-val">15</span> Lakhs</div>
+        <input type="range" id="budget-slider" min="2" max="200" value="15" step="1"
+               oninput="document.getElementById('budget-val').textContent = this.value">
+        <div class="budget-labels">
+          <span>₹2L — Starter</span>
+          <span>₹50L — Premium</span>
+          <span>₹1Cr — Luxury</span>
+          <span>₹2Cr+ — Ultra</span>
+        </div>
+      </div>
+      <div class="field">
+        <label>Desired Move-in / Completion Date</label>
+        <input type="text" id="timeline" placeholder="e.g. Within 6 months, Jan 2026">
+      </div>
+      <div class="field">
+        <label>Flexibility</label>
+        <select id="timeline-flex">
+          <option value="">Select</option>
+          <option>Fixed — strict deadline</option>
+          <option>Somewhat flexible (±2 months)</option>
+          <option>Open / No rush</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="ornament">· · ·</div>
+
+  <!-- ── 6. Lifestyle & Priorities ─────────── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">06</div>
+      <div><div class="section-title">Lifestyle & Priorities</div></div>
+    </div>
+    <p class="section-desc">What matters most in your home? Select all that apply.</p>
+    <div class="priority-grid" id="priority-grid">
+      <div class="priority-tag" onclick="toggleTag(this)">Ample Storage</div>
+      <div class="priority-tag" onclick="toggleTag(this)">Entertaining Guests</div>
+      <div class="priority-tag" onclick="toggleTag(this)">Work-from-Home Friendly</div>
+      <div class="priority-tag" onclick="toggleTag(this)">Child-Safe Design</div>
+      <div class="priority-tag" onclick="toggleTag(this)">Pet-Friendly</div>
+      <div class="priority-tag" onclick="toggleTag(this)">Abundant Natural Light</div>
+      <div class="priority-tag" onclick="toggleTag(this)">Smart Home Integration</div>
+      <div class="priority-tag" onclick="toggleTag(this)">Easy Maintenance</div>
+      <div class="priority-tag" onclick="toggleTag(this)">Privacy & Serenity</div>
+      <div class="priority-tag" onclick="toggleTag(this)">Statement Art Pieces</div>
+      <div class="priority-tag" onclick="toggleTag(this)">Indoor Plants & Greenery</div>
+      <div class="priority-tag" onclick="toggleTag(this)">Sustainable Materials</div>
+      <div class="priority-tag" onclick="toggleTag(this)">Vastu / Feng Shui Compliance</div>
+      <div class="priority-tag" onclick="toggleTag(this)">Maximise Space</div>
+      <div class="priority-tag" onclick="toggleTag(this)">Luxury Finishes</div>
+      <div class="priority-tag" onclick="toggleTag(this)">Custom / Bespoke Furniture</div>
+    </div>
+
+    <div class="field-grid" style="margin-top: 1.5rem;">
+      <div class="field">
+        <label>Number of Adults</label>
+        <input type="number" id="adults" placeholder="2" min="1">
+      </div>
+      <div class="field">
+        <label>Number of Children</label>
+        <input type="number" id="children" placeholder="0" min="0">
+      </div>
+      <div class="field">
+        <label>Pets?</label>
+        <select id="pets">
+          <option>No pets</option>
+          <option>Dog(s)</option>
+          <option>Cat(s)</option>
+          <option>Both / Multiple</option>
+          <option>Other</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="ornament">· · ·</div>
+
+  <!-- ── 7. Existing Items & Notes ─────────── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">07</div>
+      <div><div class="section-title">Existing Items & Final Notes</div></div>
+    </div>
+    <div class="field-grid">
+      <div class="field full">
+        <label>Furniture / Fixtures you want to keep</label>
+        <textarea id="keep-items" placeholder="Describe any existing pieces — sofas, beds, artwork, fixtures — that must be incorporated…"></textarea>
+      </div>
+      <div class="field full">
+        <label>Absolute Must-Haves</label>
+        <textarea id="must-haves" placeholder="A reading nook, a walk-in wardrobe, an island kitchen, underfloor heating…"></textarea>
+      </div>
+      <div class="field full">
+        <label>Deal-Breakers (things you definitely do NOT want)</label>
+        <textarea id="deal-breakers" placeholder="No dark colours, no open shelving in kitchen, no wallpaper…"></textarea>
+      </div>
+      <div class="field full">
+        <label>Anything else for us to know?</label>
+        <textarea id="other-notes" placeholder="Special accessibility needs, religious considerations, upcoming life changes…"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Submit ─────────────────────────────── -->
+  <div class="submit-area">
+    <div class="modal-eyebrow" style="margin-bottom: 0.6rem;">You're almost done</div>
+    <div class="submit-title">Generate Your Design Brief</div>
+    <p class="submit-sub">Preview your brief first, then submit — we'll receive it instantly and send you a copy.</p>
+    <button class="btn-primary" onclick="generateBrief()">Preview Brief</button>
+    <button class="btn-submit" id="submit-btn" onclick="submitBrief()">Submit</button>
+  </div>
+
+</div>
+
+<!-- ── Thank You Modal ─────────────────────────── -->
+<div class="overlay" id="thankyou-overlay">
+  <div class="modal" style="text-align: center; padding: 4rem 3rem;">
+    <div style="font-size: 3rem; margin-bottom: 1rem;">✓</div>
+    <div class="modal-eyebrow" style="margin-bottom: 0.5rem;">Brief Received</div>
+    <div class="modal-title" style="margin-bottom: 1rem;">Thank you!</div>
+    <p style="font-size: 14px; color: var(--mid); line-height: 1.7; max-width: 400px; margin: 0 auto 2rem;">
+      Your design brief has been submitted to <strong>Gridline Engineering & Construct</strong>. 
+      A copy has been sent to your email. Our team will get back to you within 24–48 hours.
+    </p>
+    <a href="https://gridlineengineeringconst.com" style="display:inline-block; padding: 14px 36px; background: var(--charcoal); color: #fff; border-radius: 4px; font-family: var(--sans); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;">Visit GEC Website</a>
+  </div>
+</div>
+
+<!-- ── Summary Modal ──────────────────────────── -->
+<div class="overlay" id="overlay" onclick="if(event.target===this) closeModal()">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-eyebrow">Design Brief</div>
+        <div class="modal-title" id="brief-client-name">Client Brief</div>
+      </div>
+      <button class="close-btn" onclick="closeModal()">×</button>
+    </div>
+    <div id="brief-content"></div>
+    <div class="modal-actions">
+      <button class="modal-btn primary" onclick="printBrief()">Print / Save PDF</button>
+      <button class="modal-btn secondary" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── Toggle helpers ──────────────────────────
+  function toggleChip(el) {
+    el.classList.toggle('active');
+    updateDimRows();
+  }
+  function toggleStyle(el) { el.classList.toggle('selected'); }
+  function togglePalette(el) { el.classList.toggle('selected'); }
+  function toggleTag(el) { el.classList.toggle('active'); }
+
+  // ── Room dimensions ─────────────────────────
+  function updateDimRows() {
+    const selected = [...document.querySelectorAll('#room-chips .chip.active')].map(c => c.dataset.room);
+    const container = document.getElementById('dim-rows');
+    const dimDiv = document.getElementById('room-dims');
+    container.innerHTML = '';
+    if (selected.length === 0) { dimDiv.style.display = 'none'; return; }
+    dimDiv.style.display = 'block';
+    selected.forEach(room => {
+      const row = document.createElement('div');
+      row.className = 'room-dim-row';
+      row.innerHTML = `
+        <div class="room-dim-label">${room}</div>
+        <input type="number" placeholder="L" min="0" data-room="${room}" data-dim="length">
+        <input type="number" placeholder="W" min="0" data-room="${room}" data-dim="width">
+        <input type="number" placeholder="H" min="0" data-room="${room}" data-dim="height">
+      `;
+      container.appendChild(row);
+    });
+  }
+
+  // ── Collect all form data ───────────────────
+  function collectAllData() {
+    const dims = {};
+    document.querySelectorAll('#dim-rows input').forEach(inp => {
+      const room = inp.dataset.room;
+      const dim = inp.dataset.dim;
+      if (!dims[room]) dims[room] = {};
+      dims[room][dim] = inp.value;
+    });
+    const dimText = Object.keys(dims).length
+      ? Object.entries(dims).map(([r, d]) => `${r}: ${d.length||'?'}ft × ${d.width||'?'}ft × ${d.height||'?'}ft`).join(' | ')
+      : '—';
+
+    return {
+      name:         document.getElementById('client-name').value,
+      email:        document.getElementById('client-email').value,
+      phone:        document.getElementById('client-phone').value,
+      location:     document.getElementById('client-location').value,
+      address:      document.getElementById('client-address').value,
+      projType:     document.getElementById('project-type').value,
+      propType:     document.getElementById('property-type').value,
+      budget:       document.getElementById('budget-val').textContent,
+      timeline:     document.getElementById('timeline').value,
+      flex:         document.getElementById('timeline-flex').value,
+      adults:       document.getElementById('adults').value,
+      children:     document.getElementById('children').value,
+      pets:         document.getElementById('pets').value,
+      styleNotes:   document.getElementById('style-notes').value,
+      keepItems:    document.getElementById('keep-items').value,
+      mustHaves:    document.getElementById('must-haves').value,
+      dealBreakers: document.getElementById('deal-breakers').value,
+      otherNotes:   document.getElementById('other-notes').value,
+      rooms:        [...document.querySelectorAll('#room-chips .chip.active')].map(c => c.dataset.room),
+      styles:       [...document.querySelectorAll('.style-card.selected')].map(c => c.dataset.style),
+      palettes:     [...document.querySelectorAll('.palette-card.selected')].map(c => c.dataset.palette),
+      priorities:   [...document.querySelectorAll('.priority-tag.active')].map(t => t.textContent.trim()),
+      dimText
+    };
+  }
+
+  // ── Generate brief (preview modal) ─────────
+  function generateBrief() {
+    const d = collectAllData();
+    document.getElementById('brief-client-name').textContent = (d.name || 'Client') + ' — Design Brief';
+
+    let html = '';
+    const row   = (label, val) => val ? `<div class="summary-section"><div class="summary-label">${label}</div><div class="summary-value">${val}</div></div>` : '';
+    const chips = (label, arr) => arr.length ? `<div class="summary-section"><div class="summary-label">${label}</div><div class="summary-chips">${arr.map(s=>`<span class="summary-chip">${s}</span>`).join('')}</div></div>` : '';
+
+    html += row('Contact', [d.email, d.phone].filter(Boolean).join(' · '));
+    html += row('Location', [d.location, d.address].filter(Boolean).join(', '));
+    html += row('Project', [d.projType, d.propType].filter(Boolean).join(' — '));
+    html += chips('Rooms in Scope', d.rooms);
+    if (d.dimText !== '—') html += row('Dimensions', d.dimText);
+    html += chips('Design Styles', d.styles);
+    if (d.styleNotes) html += row('Style Notes', d.styleNotes);
+    html += chips('Colour Direction', d.palettes);
+    html += row('Budget', `₹${d.budget} Lakhs`);
+    html += row('Timeline', [d.timeline, d.flex].filter(Boolean).join(' — '));
+    html += row('Household', [`${d.adults||'—'} adults`, `${d.children||'0'} children`, d.pets].filter(Boolean).join(', '));
+    html += chips('Priorities', d.priorities);
+    if (d.keepItems)    html += row('Items to Keep', d.keepItems);
+    if (d.mustHaves)    html += row('Must-Haves', d.mustHaves);
+    if (d.dealBreakers) html += row('Deal-Breakers', d.dealBreakers);
+    if (d.otherNotes)   html += row('Additional Notes', d.otherNotes);
+
+    document.getElementById('brief-content').innerHTML = html;
+    document.getElementById('overlay').classList.add('show');
+  }
+
+  // ── Submit brief via FormSubmit AJAX ────────
+  async function submitBrief() {
+    const d = collectAllData();
+
+    // Validation
+    const missing = [];
+    if (!d.name.trim())                   missing.push('Full Name');
+    if (!d.email.trim())                  missing.push('Email Address');
+    if (!d.phone.trim())                  missing.push('Phone Number');
+    if (!d.location.trim())               missing.push('Property Location');
+    if (!d.address.trim())                missing.push('Project Address');
+    if (!d.projType)                      missing.push('Project Type');
+    if (!d.propType)                      missing.push('Property Type');
+    if (d.rooms.length === 0)             missing.push('Rooms in Scope (Section 02)');
+    if (d.styles.length === 0)            missing.push('Design Style (Section 03)');
+    if (d.palettes.length === 0)          missing.push('Colour Direction (Section 04)');
+    if (!d.timeline.trim())               missing.push('Completion Timeline');
+    if (!d.flex)                          missing.push('Timeline Flexibility');
+
+    if (missing.length > 0) {
+      alert('Please fill in the following before submitting:\n\n• ' + missing.join('\n• '));
+      return;
+    }
+
+    const btn = document.getElementById('submit-btn');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    const payload = {
+      _subject:  `New Design Brief — ${d.name} | GEC Intake`,
+      _template: 'table',
+      _cc:        d.email,
+      _captcha:  'false',
+
+      'Client Name':          d.name        || '—',
+      'Email':                d.email       || '—',
+      'Phone':                d.phone       || '—',
+      'Location':             d.location    || '—',
+      'Property Address':     d.address     || '—',
+      'Project Type':         d.projType    || '—',
+      'Property Type':        d.propType    || '—',
+      'Rooms in Scope':       d.rooms.join(', ')     || '—',
+      'Room Dimensions':      d.dimText,
+      'Design Styles':        d.styles.join(', ')    || '—',
+      'Style Notes':          d.styleNotes  || '—',
+      'Colour Direction':     d.palettes.join(', ')  || '—',
+      'Budget':               `₹${d.budget} Lakhs`,
+      'Timeline':             d.timeline    || '—',
+      'Flexibility':          d.flex        || '—',
+      'Adults':               d.adults      || '—',
+      'Children':             d.children    || '0',
+      'Pets':                 d.pets        || '—',
+      'Priorities':           d.priorities.join(', ') || '—',
+      'Items to Keep':        d.keepItems   || '—',
+      'Must-Haves':           d.mustHaves   || '—',
+      'Deal-Breakers':        d.dealBreakers|| '—',
+      'Additional Notes':     d.otherNotes  || '—',
+    };
+
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/gridline.eng.const@gmail.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (res.ok) {
+        document.getElementById('thankyou-overlay').classList.add('show');
+      } else {
+        throw new Error('Server error');
+      }
+    } catch (err) {
+      alert('Submission failed. Please try again or WhatsApp us at +91 91138 33798.');
+      btn.textContent = 'Submit to GEC';
+      btn.disabled = false;
+    }
+  }
+
+  function closeModal() { document.getElementById('overlay').classList.remove('show'); }
+  function printBrief() { window.print(); }
+</script>
+</body>
+</html>
